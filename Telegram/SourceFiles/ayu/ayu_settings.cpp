@@ -550,6 +550,12 @@ void AyuSettings::setSaveForBots(bool val) {
 	save();
 }
 
+void AyuSettings::setExcludeBotsInGroups(bool val) {
+	if (_excludeBotsInGroups.current() == val) return;
+	_excludeBotsInGroups = val;
+	save();
+}
+
 void AyuSettings::setFiltersEnabled(bool val) {
 	if (_filtersEnabled.current() == val) return;
 	_filtersEnabled = val;
@@ -1062,6 +1068,7 @@ void to_json(nlohmann::json &j, const AyuSettings &s) {
 		{"saveDeletedMessages", s._saveDeletedMessages.current()},
 		{"saveMessagesHistory", s._saveMessagesHistory.current()},
 		{"saveForBots", s._saveForBots.current()},
+		{"excludeBotsInGroups", s._excludeBotsInGroups.current()},
 		{"shadowBanIds", s._shadowBanIds},
 		{"filtersEnabled", s._filtersEnabled.current()},
 		{"filtersEnabledInChats", s._filtersEnabledInChats.current()},
@@ -1162,6 +1169,7 @@ void from_json(const nlohmann::json &j, AyuSettings &s) {
 	s._saveDeletedMessages = j.value("saveDeletedMessages", defaults._saveDeletedMessages.current());
 	s._saveMessagesHistory = j.value("saveMessagesHistory", defaults._saveMessagesHistory.current());
 	s._saveForBots = j.value("saveForBots", defaults._saveForBots.current());
+	s._excludeBotsInGroups = j.value("excludeBotsInGroups", defaults._excludeBotsInGroups.current());
 	s._shadowBanIds = j.value("shadowBanIds", defaults._shadowBanIds);
 	s._filtersEnabled = j.value("filtersEnabled", defaults._filtersEnabled.current());
 	s._filtersEnabledInChats = j.value("filtersEnabledInChats", defaults._filtersEnabledInChats.current());
